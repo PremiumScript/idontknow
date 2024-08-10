@@ -23,14 +23,9 @@ dir F:\ >nul 2>&1
 if errorlevel 1 (
     set "driveMessage=Not Tria.ge: F drive does not exist or is not accessible"
 ) else (
-    for /f "tokens=*" %%i in ('dir F:\ /a /b') do (
-        set "driveEmpty="
-        goto :done
-    )
-    set "driveEmpty=true"
-    :done
-    if defined driveEmpty (
-        set "driveMessage=Tria.ge Detected: F drive is empty"
+    dir F:\ /a /b >nul 2>&1
+    if errorlevel 1 (
+        set "driveMessage=Not Tria.ge: F drive is empty"
         set "isVM=true"
     ) else (
         set "driveMessage=Not Tria.ge: F drive is not empty"
